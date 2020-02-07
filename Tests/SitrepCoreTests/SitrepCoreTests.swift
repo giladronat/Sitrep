@@ -201,6 +201,14 @@ final class SitrepCoreTests: XCTestCase {
         XCTAssertEqual(failures.count, 0)
     }
 
+    func testExtendedLongestType() throws {
+        let collapsingPath = "Collapsing"
+        let app = Scan(rootURL: inputs.appendingPathComponent(collapsingPath))
+        let (results, _, _) = app.run(creatingReport: false)
+
+        XCTAssertEqual(results.longestType?.name, "ExtendedStruct")
+    }
+
     static var allTests = [
         ("testClassDetection", testClassDetection),
         ("testStructDetection", testStructDetection),
@@ -219,6 +227,7 @@ final class SitrepCoreTests: XCTestCase {
         ("testEncoding", testEncoding),
         ("testReportGeneration", testReportGeneration),
         ("testBodyStripperRemovedComments", testBodyStripperRemovedComments),
-        ("testCreatingReport", testCreatingReport)
+        ("testCreatingReport", testCreatingReport),
+        ("testExtendedLongestType", testExtendedLongestType)
     ]
 }
